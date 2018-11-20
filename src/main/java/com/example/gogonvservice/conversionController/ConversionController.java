@@ -24,22 +24,15 @@ public class ConversionController {
     public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
     @GetMapping("/home")
-    private String historyIndex() {
-        return "Hi from home";
+    private String getHome() {
+        return "Hi from from go conv Service ";
     }
 
-    private void historyCreate() {
-
-    }
-
-    private void historyDelete() {
-
-    }
 
     @RequestMapping("/upload")
-    private String startConversion(Model model, @RequestParam("files") MultipartFile[] files) {
+    private String startConversion(Model model, @RequestParam("file") MultipartFile file) {
         StringBuilder fileNames = new StringBuilder();
-        for (MultipartFile file : files) {
+
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename()+" ");
             try {
@@ -48,8 +41,7 @@ public class ConversionController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
+
         return "uploadstatusview";
     }
 
