@@ -6,29 +6,37 @@ import com.qoppa.office.WordDocument;
 import com.qoppa.pdf.PDFException;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 
-public class ConvService  {
+public class ConvService implements Callable<String> {
 
-    public static void conversion(String pathFile,String toType) {
+    private String folderPath;
+    private String filePath ;
+    private String fileName ;
+    private String toType;
 
-        WordConvertOptions opts = new WordConvertOptions();
-        Thread thread=new Thread(() -> {
-            try {
-
-                WordDocument  wdoc = new WordDocument(pathFile,opts);
-                wdoc.saveAsPDF("/home/tarfa/out."+toType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (PDFException e) {
-                e.printStackTrace();
-            } catch (OfficeException e) {
-                e.printStackTrace();
-            }
-        });
-
-        thread.start();
+    public ConvService(String folderPath, String filePath, String fileName, String toType) {
+        this.folderPath = folderPath;
+        this.filePath = filePath;
+        this.fileName = fileName;
+        this.toType = toType;
     }
 
 
+
+    @Override
+    public String call() throws Exception {
+
+        WordConvertOptions opts = new WordConvertOptions();
+        try {
+            WordDocument  wdoc = new WordDocument(filePath,opts);
+            wdoc.saveAsPDF(folderPath+"/"+fileName+toType);
+        } catch (IOException | OfficeException | PDFException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Done!");
+        return "Done!";
+    }
 }
