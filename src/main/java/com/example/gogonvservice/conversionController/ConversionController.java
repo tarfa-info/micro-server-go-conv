@@ -23,14 +23,11 @@ public class ConversionController   {
     List<String> files = new ArrayList<String>();
 
 
-
     @CrossOrigin("http://localhost:4200")
-    @GetMapping("/home")
-    private String getHome() {
-
-        return "Hi from from go conv Service";
+    @GetMapping("/")
+    private String index() {
+        return "works";
     }
-
 
 
     @Async
