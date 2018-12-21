@@ -1,9 +1,5 @@
 package com.example.gogonvservice.converionService;
 
-import com.convertapi.Config;
-import com.convertapi.ConversionResult;
-import com.convertapi.ConvertApi;
-import com.convertapi.Param;
 import com.example.gogonvservice.conversion.ConvService;
 import com.example.gogonvservice.email.service.EmailService;
 import com.mailjet.client.errors.MailjetException;
@@ -32,23 +28,6 @@ public class ConverionService  {
     private final String pathFolderLocator="/home/tarfa/upload-dir";
 
 
-    public void store2(MultipartFile file ){
-
-        try {
-            Config.setDefaultSecret("NUZiSK1qVI2rWhqC");
-            long number = Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-            CompletableFuture<ConversionResult> result = ConvertApi.convert("docx", "pdf", new Param("file", Paths.get(this.rootLocation.resolve(file.getOriginalFilename()).toString())));
-            result.get().saveFile(Paths.get("/home/tarfa/upload-dir/my_file.pdf"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     public Map<String, String> store(MultipartFile file ) throws InterruptedException, ExecutionException, MailjetSocketTimeoutException, MailjetException {

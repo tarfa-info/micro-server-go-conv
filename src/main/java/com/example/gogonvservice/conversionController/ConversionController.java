@@ -42,10 +42,6 @@ public class ConversionController   {
          return CompletableFuture.completedFuture(value);
     }
 
-    @PostMapping("/up")
-    public void  newConversion(@RequestParam MultipartFile file) throws ExecutionException, InterruptedException {
-     converionService.store2(file);
 
-    }
 
 }
