@@ -17,7 +17,7 @@ public class GoGonvServiceApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... arg) throws Exception {
-		converionService.deleteAll();
-		converionService.init();
+		//converionService.deleteAll();
+		//converionService.init();
 	}
 }
