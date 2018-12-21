@@ -22,8 +22,7 @@ public class ConversionController   {
     private ConverionService converionService;
     List<String> files = new ArrayList<String>();
 
-
-    @CrossOrigin("http://localhost:4200")
+    @CrossOrigin("*")
     @GetMapping("/")
     private String index() {
         return "works";
@@ -32,7 +31,7 @@ public class ConversionController   {
 
     @Async
     @JsonFormat
-    @CrossOrigin("http://localhost:4200")
+    @CrossOrigin("*")
     @PostMapping("/upload")
     public CompletableFuture<Map<String, String>> startConversion(@RequestParam MultipartFile file) throws InterruptedException, ExecutionException, MailjetSocketTimeoutException, MailjetException {
          Map<String, String> value =converionService.store(file);
